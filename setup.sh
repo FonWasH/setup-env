@@ -49,16 +49,20 @@ SSHKey() {
 }
 
 DotfilesInstall() {
-	repo=""
-	while [ -z "$repo" ]; do
-		read -p "Enter the URL of the dotfiles repository: " repo
-	done
-	git clone --bare $repo ~/dotfiles
-	setopt -s glob_dots
-	mv ~/dotfiles/* ~/
-	rm -rf ~/dotfiles
-	clear
-	echo "Dotfiles installed."
+    repo=""
+    while [ -z "$repo" ]; do
+        read -p "Enter the URL of the dotfiles repository: " repo
+    done
+    git clone --bare $repo ~/dotfiles
+    if [ -n "$ZSH_VERSION" ]; then
+        setopt -s glob_dots  # Zsh
+    elif [ -n "$BASH_VERSION" ]; then
+        shopt -s dotglob  # Bash
+    fi
+    mv ~/dotfiles/{*,.*} ~/
+    rm -rf ~/dotfiles
+    clear
+    echo "Dotfiles installed."
 }
 
 DevToolsInstall() {
