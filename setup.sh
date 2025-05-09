@@ -10,6 +10,10 @@ ZSHInstall() {
 
     if ! command -v zsh &>/dev/null; then
         if sudo -l &>/dev/null; then
+            echo "Updating package lists..."
+            sudo apt update && sudo apt upgrade -y
+
+            echo "Installing ZSH..."
             sudo apt -y install zsh
             zsh_install=true
             echo "ZSH installed."
@@ -76,6 +80,10 @@ DotfilesInstall() {
 
 DevToolsInstall() {
     if sudo -l &>/dev/null; then
+        echo "Updating package lists..."
+        sudo apt update && sudo apt upgrade -y
+
+        echo "Installing development tools..."
         sudo apt -y install build-essential gdb valgrind vim manpages-dev cmake
         echo "Development tools installed."
     else
