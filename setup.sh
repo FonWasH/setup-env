@@ -61,8 +61,7 @@ DotfilesInstall() {
 	echo "Dotfiles installed."
 }
 
-DevToolsInstall
-{
+DevToolsInstall() {
 	if sudo -l &>/dev/null; then
 		sudo apt -y install build-essential gdb valgrind vim manpages-dev cmake
 		clear
